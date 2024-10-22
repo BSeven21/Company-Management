@@ -1,0 +1,105 @@
+{% extends 'companies/base.html' %} {% block content %}
+
+<form method="POST" class="container mt-4" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <h2 class="mb-4">Add New Employee</h2>
+
+  <div class="mb-3">
+    <label for="e_company" class="form-label">Company Name</label>
+    <select name="e_company" id="e_company" class="form-select" required>
+      <option value="" disabled selected>Select a company</option>
+      {% for comp in company %}
+      <option value="{{ comp.id }}">{{ comp.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="e_loc" class="form-label">Location</label>
+    <select name="e_loc" id="e_loc" class="form-select" required>
+      <option value="" disabled selected>Select a location</option>
+      {% for loc in location %}
+      <option value="{{ loc.id }}">{{ loc.l_name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="e_name" class="form-label">Name of the Employee</label>
+    <input
+      type="text"
+      class="form-control"
+      id="e_name"
+      name="e_name"
+      placeholder="Enter your name"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="e_phone" class="form-label">Phone Number</label>
+    <input
+      type="tel"
+      class="form-control"
+      id="e_phone"
+      name="e_phone"
+      placeholder="Enter your phone number"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="e_address" class="form-label">Address</label>
+    <input
+      type="text"
+      class="form-control"
+      id="e_address"
+      name="e_address"
+      placeholder="Enter your address"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="e_img" class="form-label">Image</label>
+    <input
+      type="file"
+      class="form-control"
+      id="e_img"
+      name="e_img"
+      accept="image/*"
+      onchange="previewImage(event)"
+    />
+  </div>
+
+  <!-- Image Preview -->
+  <div class="mb-3">
+    <img
+      id="image_preview"
+      src=""
+      alt="Image Preview"
+      style="max-width: 200px; display: none"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<script>
+  function previewImage(event) {
+    const imagePreview = document.getElementById("image_preview");
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+</script>
+
+<br />
+{% endblock %}

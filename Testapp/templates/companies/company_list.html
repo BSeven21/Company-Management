@@ -1,0 +1,34 @@
+{% extends 'companies/base.html' %} {% block content %}
+<h2>Companies</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Company ID</th>
+      <th>Company Name</th>
+      <th>Phone Number</th>
+      <th>Email</th>
+      <th>Website</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for company in companies %}
+    <tr>
+      <td>{{ company.id }}</td>
+      <td>{{ company.name }}</td>
+      <td>{{ company.phone }}</td>
+      <td>{{ company.email_address }}</td>
+      <td><a href="{{ company.web }}" target="_blank">{{ company.web }}</a></td>
+      <td>
+        <a href="{% url 'edit_company' company.pk %}" class="btn btn-warning"
+          >Edit</a
+        >
+        <a href="{% url 'delete_company' company.pk %}" class="btn btn-danger"
+          >Delete</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

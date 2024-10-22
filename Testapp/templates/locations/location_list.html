@@ -1,0 +1,47 @@
+{% extends 'companies/base.html' %}
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Location List</h2>
+        
+        <!-- Add Location Button -->
+        <div class="mb-3">
+            <a href="{% url 'add_location' %}" class="btn btn-primary">Add New Location</a>
+        </div>
+
+        <!-- Table of Location -->
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for location in locations %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ location.l_name }}</td>
+                    <td>{{ location.l_address }}</td>
+                    <td>{{ location.l_phone }}</td>
+                    <td>
+                        <!-- Edit Button -->
+                        <a href="{% url 'edit_location' location.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <!-- Delete Button -->
+                        <a href="{% url 'delete_location' location.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- No Location message -->
+        {% if not locations %}
+        <div class="alert alert-warning text-center" role="alert">
+            No Location found. Click "Add New Location" to get started!
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

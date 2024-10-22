@@ -1,0 +1,24 @@
+{% extends 'companies/base.html' %} {% block content %}
+<h2>Edit {{ employee.e_name }}</h2>
+
+<!-- Display the current image -->
+{% if employee.e_img %}
+<div class="mb-3">
+  <label>Current Photo:</label><br />
+  <img
+    src="{{ employee.e_img.url }}"
+    alt="{{ employee.e_name }}"
+    class="img-thumbnail"
+    style="max-width: 200px"
+  />
+</div>
+{% else %}
+<p>No image available for this employee.</p>
+{% endif %}
+
+<!-- Form to edit employee -->
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Update Employee</button>
+</form>
+{% endblock %}

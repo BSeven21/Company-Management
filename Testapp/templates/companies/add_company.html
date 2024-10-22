@@ -1,0 +1,49 @@
+{% extends 'companies/base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Add New Company</h2>
+
+    <form method="POST" class="mb-3">
+        {% csrf_token %}
+        
+        <!-- Company Name -->
+        <div class="mb-3">
+            <label for="id_name" class="form-label">Company Name</label>
+            {{ form.name.errors }}
+            {{ form.name }}
+        </div>
+
+        <!-- Zip Code -->
+        <div class="mb-3">
+            <label for="id_zip_code" class="form-label">Zip Code</label>
+            {{ form.zip_code.errors }}
+            {{ form.zip_code }}
+        </div>
+
+        <!-- Email Address -->
+        <div class="mb-3">
+            <label for="id_email_address" class="form-label">Email Address</label>
+            {{ form.email_address.errors }}
+            {{ form.email_address }}
+        </div>
+
+        <!-- Phone -->
+        <div class="mb-3">
+            <label for="id_phone" class="form-label">Phone Number</label>
+            {{ form.phone.errors }}
+            {{ form.phone }}
+        </div>
+
+        <!-- Website -->
+        <div class="mb-3">
+            <label for="id_web" class="form-label">Website</label>
+            {{ form.web.errors }}
+            {{ form.web }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Company</button>
+    </form>
+</div>
+
+{% endblock %}
